@@ -193,6 +193,6 @@ class AdminController extends Controller
     // }
 
     public function class(){
-       return view('admin.content.class');
+       return view('admin.body.content.class');
     }
 }

@@ -46,6 +46,7 @@
 
         <!-- partial:partials/_sidebar.html -->
         @include('admin.body.sidebar')
+
         <!-- partial -->
 
         <div class="page-wrapper">
