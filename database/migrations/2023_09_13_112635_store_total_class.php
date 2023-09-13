@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('store_total_classes', function (Blueprint $table) {
             $table->id();
-            $table->
+            $table->string('school');
+            $table->integer('class');
             $table->timestamps();
         });
     }
@@ -23,6 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('store_total_classes');
+
     }
 };

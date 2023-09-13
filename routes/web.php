@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StoreTotalClassController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
 
 // Admin Group
-Route::middleware(['auth', 'role:admin,teacher'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/teacher', [AdminController::class, 'TeacherTable'])->name('teacher');
     Route::delete('/forms/{form}', [AdminController::class, 'delete'])->name('forms.destroy');
@@ -36,8 +38,13 @@ Route::middleware(['auth', 'role:admin,teacher'])->group(function () {
     //     return view('admin.content.teacher');
     // })->name('form');
     Route::get('/class', [AdminController::class, 'class'])->name('class');
+    Route::get('/controller', [AdminController::class, 'Control'])->name('control');
+    Route::post('/storetotalclass', [StoreTotalClassController ::class, 'create'])->name('storetotalclass');
+
 
 });
+
+
 
 Route::middleware(['auth', 'role:admin,teacher'])->group(function () {
     // Route::get('/form', function () {

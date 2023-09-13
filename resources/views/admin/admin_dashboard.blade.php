@@ -22,6 +22,8 @@
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/core/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/jquery-steps/jquery.steps.css') }}">
+
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
@@ -63,7 +65,6 @@
             <!-- partial:partials/_footer.html -->
             @include('admin.body.footer')
             <!-- partial -->
-
         </div>
     </div>
 
@@ -79,10 +80,14 @@
     <!-- inject:js -->
     <script src="{{ asset('backend/assets/vendors/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/template.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/jquery-steps/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/wizard.js') }}"></script>
+
     <!-- endinject -->
 
     <!-- Custom js for this page -->
     <script src="{{ asset('backend/assets/js/dashboard-dark.js') }}"></script>
+
     <!-- End custom js for this page -->
 
     <script type="text/javascript" src="https://cdsnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

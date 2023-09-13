@@ -195,4 +195,8 @@ class AdminController extends Controller
     public function class(){
        return view('admin.body.content.class');
     }
+    public function Control(){
+        return view('admin.body.content.control');
+    }
+    
 }
