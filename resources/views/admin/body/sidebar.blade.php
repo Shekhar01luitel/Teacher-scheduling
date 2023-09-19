@@ -71,13 +71,13 @@
             <li class="nav-item nav-category">Relation Classess</li>
             <li
                 class="nav-item @if (request()->routeIs('class.section')) active @elseif (request()->routeIs('period.time.relation')) active @endif">
-                <a class="nav-link " data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false"
-                    aria-controls="uiComponents">
+                <a class="nav-link " data-bs-toggle="collapse" href="#relation" role="button" aria-expanded="false"
+                    aria-controls="relation">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">School Relation Kit</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
-                <div class="collapse" id="uiComponents">
+                <div class="collapse" id="relation">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
                             <a href="{{ route('relationclasssection') }}" class="nav-link">Class-Section</a>

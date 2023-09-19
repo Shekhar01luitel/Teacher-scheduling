@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRelationClassSectionRequest;
 use App\Http\Requests\UpdateRelationClassSectionRequest;
 use App\Models\RelationClassSection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class RelationClassSectionController extends Controller
 {
@@ -19,9 +22,17 @@ class RelationClassSectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'class_id' => 'required|integer',
+            'section_id' => 'required|integer'
+        ]);
+
+
+        RelationClassSection::create($validator->validated());
+        // dd($validator);
+        return Redirect::route('relationclasssection');
     }
 
     /**

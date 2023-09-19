@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('relation_class_sections', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('class_id'); // Foreign key form class_names table bata
+            $table->unsignedBigInteger('section_id');  // Foreign key form sections table bata
             $table->timestamps();
+            $table->foreign('class_id')->references('id')->on('class_names');
+            $table->foreign('section_id')->references('id')->on('sections');
+
         });
     }
 

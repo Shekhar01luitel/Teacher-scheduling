@@ -81,6 +81,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/seections/update/{class}', [CustomSectionController ::class, 'update'])->name('section.update');
 
     Route::get('/ClassRelationSetion', [AdminController::class, 'RelationClassSection'])->name('relationclasssection');
+    Route::post('/relationclasssection', [RelationClassSectionController ::class, 'create'])->name('relationclasssection.create.form');
+    Route::delete('/relationclasssection/{destory}', [RelationClassSectionController::class, 'destroy'])->name('relationclasssection.destroy');
+    Route::put('/relationclasssection/update/{update}', [RelationClassSectionController ::class, 'update'])->name('relationclasssection.update');
 
 });
 

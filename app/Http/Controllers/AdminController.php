@@ -249,9 +249,14 @@ class AdminController extends Controller
     }
     public function RelationClassSection()
     {
-        $List= RelationClassSection::all();
 
-        return view('admin.body.content.relationclasssection', compact('List'));
+        dd(ClassName::with('sections')->get()->toArray());
+        $section = Section::all();
+        $class = ClassName::all();
 
+
+        $relationtablelist = RelationClassSection::all();
+        dd($relationtablelist);
+        return view('admin.body.content.relationclasssection', compact('relationtablelist', 'section', 'class'));
     }
 }

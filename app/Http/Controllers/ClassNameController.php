@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 // use App\Http\Requests\StoreClassNameRequest;
 use App\Http\Requests\UpdateClassNameRequest;
 use App\Models\ClassName;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 

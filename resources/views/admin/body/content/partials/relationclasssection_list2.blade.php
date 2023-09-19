@@ -21,30 +21,38 @@
                                 <thead>
                                     <tr>
                                         <th class="pt-0">#</th>
-                                        <th class="pt-0">class_id</th>
-                                        <th class="pt-0">section_id</th>
+                                        <th class="pt-0">class</th>
+                                        <th class="pt-0">section</th>
                                         <th class="pt-0">Joined Date</th>
                                         <th class="pt-0">Last Update</th>
                                         <th class="pt-0">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($relationtablelist as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <div data-bs-toggle="modal"
                                                     data-bs-target="#nameModal{{ $item->id }}">
-                                                        {{ $item->class_id }}
+                                                    @foreach ($class as $classlist)
+                                                    @if ($item->class_id == $classlist->id)
+                                                        {{$classlist->class}}
+                                                    @endif
+                                                    @endforeach
+
                                                 </div>
 
                                             </td>
                                             <td>
                                                 <div data-bs-toggle="modal"
-                                                data-bs-target="#nameModal{{ $item->id }}">
-                                                    {{ $item->section_id }}
-                                            </div>
+                                                    data-bs-target="#nameModal{{ $item->id }}">
+                                                    @foreach ($section as $sectionlist)
+                                                    @if ($item->section_id == $sectionlist->id)
+                                                        {{$sectionlist->sections}}
+                                                    @endif
+                                                    @endforeach
+                                                </div>
                                             </td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->updated_at }}</td>
@@ -89,8 +97,7 @@
                                                                 <label for="name" class="form-label">Update
                                                                     Period Name</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="periods"
-                                                                    value="" required>
+                                                                    name="periods" value="" required>
                                                             </div>
                                                             <button class="btn btn-primary">Update</button>
                                                         </form>
