@@ -31,11 +31,9 @@ class SectionController extends Controller
 
         // Create a new school record in the database
         $sectionname = new Section();
-        $sectionname->sections= $request->input('section');
+        $sectionname->sections = $request->input('section');
         $sectionname->save();
         return Redirect::route('section');
-
-
     }
 
     /**
@@ -65,13 +63,14 @@ class SectionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, $section)
     {
-        $validate = Validator::make($request->all(),[
+        $validate = Validator::make($request->all(), [
             'sections' => 'string',
         ]);
-        Section::create($validate->validate());
-        return Redirect::route('section');
+        $section = Section::find($section);
+        $section->update($validate->validated());
+        return redirect()->back()->with('succcess', 'Record updated successfully');
         // dd($_POST);
 
     }

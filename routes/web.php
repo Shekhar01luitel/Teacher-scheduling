@@ -9,7 +9,8 @@ use App\Http\Controllers\StoreTotalClassController;
 use App\Http\Controllers\ClassNameController;
 use App\Http\Controllers\CustomSectionController;
 use App\Http\Controllers\SectionController;
-
+use App\Http\Controllers\CustomPeriodController;
+use App\Http\Controllers\RelationClassSectionController;
 
 
 Route::get('/debug', function () {
@@ -63,13 +64,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/division/update/{division}', [SectionController ::class, 'update'])->name('division.update');
 
 
-
-
-
-    Route::get('/section-relation', [AdminController::class, 'ClassSection'])->name('class.section');
-    Route::post('/sectionname', [CustomSectionController ::class, 'create'])->name('sectionname');
-    Route::delete('/class-section/{form}', [CustomSectionController::class, 'destroy'])->name('section.destroy');
-    Route::put('/seections/update/{class}', [CustomSectionController ::class, 'update'])->name('section.update');
+    Route::get('/period', [AdminController::class, 'Period'])->name('periods');
+    Route::post('/create/period', [CustomPeriodController::class, 'create'])->name('period.create.form');
+    Route::delete('/period/{period}', [CustomPeriodController::class, 'destroy'])->name('period.destroy');
+    Route::put('/period/update/{period}', [CustomPeriodController ::class, 'update'])->name('period.update');
 
     Route::get('/controller', [AdminController::class, 'Control'])->name('control');
     Route::post('/storetotalclass', [StoreTotalClassController ::class, 'create'])->name('storetotalclass');
@@ -77,6 +75,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/updatestoretotalclass/{form}', [StoreTotalClassController ::class, 'update'])->name('school.update');
     // Route::resource('control', StoreTotalClassController::class);
 
+    Route::get('/section-relation', [AdminController::class, 'ClassSection'])->name('class.section');
+    Route::post('/sectionname', [CustomSectionController ::class, 'create'])->name('sectionname');
+    Route::delete('/class-section/{form}', [CustomSectionController::class, 'destroy'])->name('section.destroy');
+    Route::put('/seections/update/{class}', [CustomSectionController ::class, 'update'])->name('section.update');
+
+    Route::get('/ClassRelationSetion', [AdminController::class, 'RelationClassSection'])->name('relationclasssection');
 
 });
 

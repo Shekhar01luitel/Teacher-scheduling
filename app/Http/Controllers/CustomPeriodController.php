@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomPeriodRequest;
 use App\Http\Requests\UpdateCustomPeriodRequest;
 use App\Models\CustomPeriod;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+
 
 class CustomPeriodController extends Controller
 {
@@ -19,9 +23,16 @@ class CustomPeriodController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // dd($_POST);
+        $validator = Validator::make($request->all(), [
+            'periods' => 'required|string'
+        ]);
+
+        CustomPeriod::create($validator->validated());
+        // dd($validator);
+        return Redirect::route('periods');
     }
 
     /**
@@ -51,16 +62,26 @@ class CustomPeriodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomPeriodRequest $request, CustomPeriod $customPeriod)
+    public function update(Request $request, $period)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'periods' => 'required|string'
+        ]);
+
+        $customPeriod = CustomPeriod::find($period);
+
+        $customPeriod->update($validator->validated());
+
+        return redirect()->route('periods')->with('succcess', 'Record updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CustomPeriod $customPeriod)
+    public function destroy(CustomPeriod $period)
     {
-        //
+        $period->delete();
+        return redirect()->back()->with('succcess', 'Form deleted successfully');
     }
 }

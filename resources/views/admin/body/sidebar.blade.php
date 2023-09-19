@@ -34,7 +34,7 @@
 
             {{-- @if (Auth::user()->role == 'admin') --}}
             <li id="teacher" class="nav-item ">
-                <a href="{{ route('teacher') }}" class="nav-link" >
+                <a href="{{ route('teacher') }}" class="nav-link">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">Teachers</span>
                 </a>
@@ -53,24 +53,40 @@
                 <div class="collapse" id="uiComponents">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('control') }}"
-                                class="nav-link">School</a>
+                            <a href="{{ route('control') }}" class="nav-link">School</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('class') }}"
-                                class="nav-link">Class</a>
+                            <a href="{{ route('class') }}" class="nav-link">Class</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('section') }}"
-                                class="nav-link">Section</a>
+                            <a href="{{ route('section') }}" class="nav-link">Section</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('class.section') }}"
-                                class="nav-link">Class-Section</a>
+                            <a href="{{ route('periods') }}" class="nav-link">Period</a>
                         </li>
                     </ul>
                 </div>
             </li>
+
+            <li class="nav-item nav-category">Relation Classess</li>
+            <li
+                class="nav-item @if (request()->routeIs('class.section')) active @elseif (request()->routeIs('period.time.relation')) active @endif">
+                <a class="nav-link " data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false"
+                    aria-controls="uiComponents">
+                    <i class="link-icon" data-feather="feather"></i>
+                    <span class="link-title">School Relation Kit</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="uiComponents">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('relationclasssection') }}" class="nav-link">Class-Section</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
             {{-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#authPages" role="button"
                     aria-expanded="false" aria-controls="authPages">

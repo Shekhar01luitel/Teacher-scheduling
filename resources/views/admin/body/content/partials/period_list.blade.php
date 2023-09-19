@@ -21,7 +21,7 @@
                                 <thead>
                                     <tr>
                                         <th class="pt-0">#</th>
-                                        <th class="pt-0">Section</th>
+                                        <th class="pt-0">Name</th>
                                         <th class="pt-0">Joined Date</th>
                                         <th class="pt-0">Last Update</th>
                                         <th class="pt-0">Actions</th>
@@ -35,7 +35,7 @@
                                             <td>
                                                 <div data-bs-toggle="modal"
                                                     data-bs-target="#nameModal{{ $item->id }}">
-                                                    {{ $item->sections }}
+                                                        {{ $item->periods }}
                                                 </div>
                                             </td>
                                             <td>{{ $item->created_at }}</td>
@@ -64,24 +64,24 @@
                                                     <div class="modal-body">
                                                         <div class="mb-3">
                                                             <label for="name" class="form-label">Previous
-                                                                Class Name
+                                                                Period Name
                                                             </label>
                                                             <input type="text"
                                                                 class="form-control @error('school') is-invalid @enderror"
                                                                 name="name" required pattern="[A-Za-z ]+"
                                                                 title="Only letters and spaces are allowed"
-                                                                value="{{ $item->sections}}" readonly>
+                                                                value="{{ $item->periods }}" readonly>
 
                                                         </div>
                                                         <form method="POST"
-                                                            action="{{ route('division.update', ['division' => $item->id]) }}">
+                                                            action="{{ route('period.update', ['period' => $item->id]) }}">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="mb-3">
                                                                 <label for="name" class="form-label">Update
-                                                                    Name</label>
+                                                                    Period Name</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="sections"
+                                                                    name="periods"
                                                                     value="" required>
                                                             </div>
                                                             <button class="btn btn-primary">Update</button>
@@ -111,13 +111,13 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         Are you sure you want to delete
-                                                        {{ $item->sections }}?
+                                                        {{ $item->periods }}?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Cancel</button>
                                                         <form method="POST"
-                                                            action="{{ route('division.destroy', ['section' => $item->id]) }}">
+                                                            action="{{ route('period.destroy', ['period' => $item->id]) }}">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"

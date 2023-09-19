@@ -12,6 +12,8 @@ use App\Models\CustomSection;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Teacher;
 use App\Models\Section;
+use App\Models\CustomPeriod;
+use App\Models\RelationClassSection;
 
 class AdminController extends Controller
 {
@@ -231,11 +233,25 @@ class AdminController extends Controller
         // $classNamesWithCustomSections = CustomSection::with('customSections');
         // dd($classNamesWithCustomSections);
         return view('admin.body.content.class_section', compact('List'));
-
     }
-    public function Section(){
+    public function Section()
+    {
         $List = Section::all();
 
         return view('admin.body.content.section', compact('List'));
+    }
+    public function Period()
+    {
+        $List = CustomPeriod::all();
+        // dd($List);
+
+        return view('admin.body.content.period', compact('List'));
+    }
+    public function RelationClassSection()
+    {
+        $List= RelationClassSection::all();
+
+        return view('admin.body.content.relationclasssection', compact('List'));
+
     }
 }
