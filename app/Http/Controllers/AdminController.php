@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\StoreTotalClass;
+use App\Models\ClassName;
+use App\Models\CustomSection;
+
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\AgentController;
 use App\Http\Requests\Teacher;
+use App\Models\Section;
 
 class AdminController extends Controller
 {
@@ -102,7 +106,7 @@ class AdminController extends Controller
 
     public function update(Teacher $request, User $form)
     {
-        // dd($request['email']);
+        // dd($form);
 
         // Get the updated name from the form input
         if ($request->input('name')) {
@@ -192,11 +196,46 @@ class AdminController extends Controller
     //     }
     // }
 
-    public function class(){
-       return view('admin.body.content.class');
+    public function class()
+    {
+        $List = ClassName::all();
+
+        return view('admin.body.content.class', compact('List'));
     }
-    public function Control(){
-        return view('admin.body.content.control');
+    public function  Control()
+    {
+        $List = StoreTotalClass::all();
+        return view('admin.body.content.control', compact('List'));
     }
-    
+
+
+    public function ClassSection()
+    {
+        $List = ClassName::with('customSections')->get();
+        // Now, you can access the data:
+        // echo '<pre>';
+        // var_dump($classNamesWithCustomSections);
+        // echo '</pre>';
+        // die();
+        // foreach ($List as $className) {
+        //     // dd($className);
+        //     echo "Class Name: {$className->class}\n";
+        //     echo "Custom Sections:\n";
+        //     foreach ($className->customSections as $CustomSection) {
+        //         echo "- {$CustomSection->section_name}\n";
+        //     }
+        //     echo "====================\n";
+        // }
+
+
+        // $classNamesWithCustomSections = CustomSection::with('customSections');
+        // dd($classNamesWithCustomSections);
+        return view('admin.body.content.class_section', compact('List'));
+
+    }
+    public function Section(){
+        $List = Section::all();
+
+        return view('admin.body.content.section', compact('List'));
+    }
 }

@@ -5,12 +5,12 @@
                 <div class="card-body">
                     <section>
                         <h4 class="mb-4">Fill Form</h4>
-                        <form class="forms-sample" method="POST" action="{{ route('classname') }}">
+                        <form class="forms-sample" method="POST" action="{{ route('division.create.form') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="class" class="form-label">Add Class</label>
-                                <input type="name" class="form-control" name="class" id="school-name"
-                                    placeholder="Class Name" required>
+                                <label for="class" class="form-label">Section Name</label>
+                                <input type="name" class="form-control" name="section" id="section-name"
+                                    placeholder="Section Name" required>
                             </div>
                             <div>
                                 <input type="submit" value="Submit Class"

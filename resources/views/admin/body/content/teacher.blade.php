@@ -406,7 +406,6 @@
                                                         <form method="POST"
                                                             action="{{ route('forms.destroy', ['form' => $item->id]) }}">
                                                             @csrf
-                                                            @method('DELETE')
                                                             <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form>
                                                     </div>

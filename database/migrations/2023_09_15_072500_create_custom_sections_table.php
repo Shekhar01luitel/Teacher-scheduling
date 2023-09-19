@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('store_total_classes', function (Blueprint $table) {
+        Schema::create('custom_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('school');
-            $table->integer('class')->nullable();
+            $table->unsignedBigInteger('class_id'); // Foreign key
+
+            $table->string('section_name');
             $table->timestamps();
+
+            $table->foreign('class_id')->references('id')->on('class_names');
+
         });
     }
 
@@ -24,7 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('store_total_classes');
-
+        Schema::dropIfExists('custom_sections');
     }
 };

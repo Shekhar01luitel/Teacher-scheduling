@@ -6,6 +6,16 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StoreTotalClassController;
+use App\Http\Controllers\ClassNameController;
+use App\Http\Controllers\CustomSectionController;
+use App\Http\Controllers\SectionController;
+
+
+
+Route::get('/debug', function () {
+    Debugbar::info('Hello, Debugbar!');
+    return view('welcome');
+});
 
 
 Route::get('/', function () {
@@ -32,14 +42,40 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/teacher', [AdminController::class, 'TeacherTable'])->name('teacher');
+    // Route::delete('/forms/{form}', [AdminController::class, 'delete'])->name('forms.destroy');
+    // Route::delete('/forms/{form}', [AdminController::class, 'delete'])->name('forms.destroy');
     Route::delete('/forms/{form}', [AdminController::class, 'delete'])->name('forms.destroy');
+
+
     Route::post('/teachers/update/{form}', [AdminController::class, 'update'])->name('teachers.update');
     // Route::get('/form', function () {
     //     return view('admin.content.teacher');
     // })->name('form');
     Route::get('/class', [AdminController::class, 'class'])->name('class');
+    Route::post('/classname', [ClassNameController ::class, 'create'])->name('classname');
+    Route::delete('/class/{form}', [ClassNameController::class, 'destroy'])->name('class.destroy');
+    Route::put('/class/update/{class}', [ClassNameController ::class, 'update'])->name('class.update');
+
+
+    Route::get('/division', [AdminController::class, 'section'])->name('section');
+    Route::post('/create/section', [SectionController ::class, 'create'])->name('division.create.form');
+    Route::delete('/division/{section}', [SectionController::class, 'destroy'])->name('division.destroy');
+    Route::put('/division/update/{division}', [SectionController ::class, 'update'])->name('division.update');
+
+
+
+
+
+    Route::get('/section-relation', [AdminController::class, 'ClassSection'])->name('class.section');
+    Route::post('/sectionname', [CustomSectionController ::class, 'create'])->name('sectionname');
+    Route::delete('/class-section/{form}', [CustomSectionController::class, 'destroy'])->name('section.destroy');
+    Route::put('/seections/update/{class}', [CustomSectionController ::class, 'update'])->name('section.update');
+
     Route::get('/controller', [AdminController::class, 'Control'])->name('control');
     Route::post('/storetotalclass', [StoreTotalClassController ::class, 'create'])->name('storetotalclass');
+    Route::delete('/form/{form}', [StoreTotalClassController::class, 'delete'])->name('school.destroy');
+    Route::put('/updatestoretotalclass/{form}', [StoreTotalClassController ::class, 'update'])->name('school.update');
+    // Route::resource('control', StoreTotalClassController::class);
 
 
 });
@@ -50,7 +86,7 @@ Route::middleware(['auth', 'role:admin,teacher'])->group(function () {
     // Route::get('/form', function () {
     //     return view('admin.content.teacher');
     // })->name('form');
-    Route::get('/form/teacher', [TeacherController::class, 'index'])->name('form');
+    Route::get('/form', [TeacherController::class, 'index'])->name('form');
     Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
