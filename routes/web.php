@@ -82,11 +82,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/ClassRelationSetion', [AdminController::class, 'RelationClassSection'])->name('relationclasssection');
     Route::post('/relationclasssection', [RelationClassSectionController ::class, 'create'])->name('relationclasssection.create.form');
-    Route::delete('/relationclasssection/{destory}', [RelationClassSectionController::class, 'destroy'])->name('relationclasssection.destroy');
+    Route::post('/relationclasssection/destroy', [RelationClassSectionController::class, 'destroy'])->name('relationclasssection.destroy');
     Route::put('/relationclasssection/update/{update}', [RelationClassSectionController ::class, 'update'])->name('relationclasssection.update');
-
 });
-
 
 
 Route::middleware(['auth', 'role:admin,teacher'])->group(function () {

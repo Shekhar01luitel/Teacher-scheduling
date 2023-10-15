@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class RelationClassSection extends Model
 {
-    protected $fillable  = ['class_id', 'section_id'];
+    protected $fillable  = ['id','class_id', 'section_id'];
     use HasFactory;
 
     public function RelationData()
     {
-        return $this->belongsTo(ClassName::class, 'class_id')->belongsTo(Section::class, 'section_id');
+        return $this->belongsTo(ClassName::class, 'class_id')->belongsTo(Section::class, 'section_id')->with();
     }
 }

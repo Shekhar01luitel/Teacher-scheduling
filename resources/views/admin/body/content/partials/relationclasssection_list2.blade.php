@@ -14,8 +14,6 @@
                         </div>
                     @endif
                     <div class="row">
-
-
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
                                 <thead>
@@ -23,127 +21,110 @@
                                         <th class="pt-0">#</th>
                                         <th class="pt-0">class</th>
                                         <th class="pt-0">section</th>
-                                        <th class="pt-0">Joined Date</th>
-                                        <th class="pt-0">Last Update</th>
-                                        <th class="pt-0">Actions</th>
+                                        <th class="pt-0">action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($relationtablelist as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <div data-bs-toggle="modal"
-                                                    data-bs-target="#nameModal{{ $item->id }}">
-                                                    @foreach ($class as $classlist)
-                                                    @if ($item->class_id == $classlist->id)
-                                                        {{$classlist->class}}
-                                                    @endif
-                                                    @endforeach
+                                    @php
+                                        $rowspan = 0;
+                                    @endphp
+                                    {{-- @dd($ClassSectionRelation) --}}
 
-                                                </div>
+                                    @foreach ($ClassSectionRelation as $relationtableclass)
+                                        {{-- @foreach ($class_relation as $relationtableclass) --}}
 
-                                            </td>
-                                            <td>
-                                                <div data-bs-toggle="modal"
-                                                    data-bs-target="#nameModal{{ $item->id }}">
-                                                    @foreach ($section as $sectionlist)
-                                                    @if ($item->section_id == $sectionlist->id)
-                                                        {{$sectionlist->sections}}
-                                                    @endif
-                                                    @endforeach
-                                                </div>
-                                            </td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->updated_at }}</td>
-                                            <td>
-                                                <div class="btn badge bg-success" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal{{ $item->id }}">
-                                                    Delete
-                                                </div>
-                                            </td>
-                                        </tr>
 
-                                        <!-- The Modal for name -->
-                                        <div class="modal" id="nameModal{{ $item->id }}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
+                                        @if (!empty($relationtableclass['sections']))
+                                            @php
+                                                $count = count($relationtableclass['sections']);
+                                                $rowspan = $count > 1 ? $count + 1 : 1;
+                                            @endphp
 
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">School Period Name
-                                                            Update</h4>
-                                                        <div class="btn-close" data-bs-dismiss="modal"></div>
+                                            <tr>
+                                                <td rowspan="{{ $rowspan }}">{{ $loop->iteration }}</td>
+                                                {{-- <td rowspan="{{ $rowspsan }}">{{ $ClassSectionRelation->$id }}</td> --}}
+
+                                                <td rowspan="{{ $rowspan }}" id="{{ $relationtableclass['id'] }}">
+                                                    {{ $relationtableclass['class'] }}
+                                                </td>
+
+                                                @if ($count > 1)
+                                                    @foreach ($relationtableclass['sections'] as $sectionlist)
+                                            <tr>
+                                                <td id="{{ $sectionlist['id'] }}">{{ $sectionlist['sections'] }}</td>
+                                                <td>
+                                                    {{-- <div class="btn badge bg-success" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal">
+                                                        Delete
+                                                    </div> --}}
+                                                    <div class="btn badge bg-success" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal"
+                                                        data-classid="{{ $relationtableclass['id'] }}"
+                                                        data-sectionid="{{ $sectionlist['id'] }}">
+                                                        Delete
                                                     </div>
-
-                                                    <!-- Modal body -->
-                                                    <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="name" class="form-label">Previous
-                                                                Period Name
-                                                            </label>
-                                                            <input type="text"
-                                                                class="form-control @error('school') is-invalid @enderror"
-                                                                name="name" required pattern="[A-Za-z ]+"
-                                                                title="Only letters and spaces are allowed"
-                                                                value="{{ $item->periods }}" readonly>
-
-                                                        </div>
-                                                        <form method="POST"
-                                                            action="{{ route('period.update', ['period' => $item->id]) }}">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="mb-3">
-                                                                <label for="name" class="form-label">Update
-                                                                    Period Name</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="periods" value="" required>
-                                                            </div>
-                                                            <button class="btn btn-primary">Update</button>
-                                                        </form>
-
-                                                    </div>
-
-                                                    <!-- Modal footer -->
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                    </div>
-
-                                                </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <td id="{{$relationtableclass['sections'][0]['id'] }}">
+                                            {{ $relationtableclass['sections'][0]['sections'] }}</td>
+                                        <td>
+                                            {{-- <div class="btn badge bg-success" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal">
+                                                Delete
+                                            </div> --}}
+                                            <div class="btn badge bg-success" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal"
+                                                data-classid="{{ $relationtableclass['id'] }}"
+                                                data-sectionid="{{ $relationtableclass['sections'][0]['id'] }}">
+                                                Delete
                                             </div>
-                                        </div>
-
-                                        {{-- Model to Delete the user --}}
-                                        <div class="modal" id="deleteModal{{ $item->id }}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Delete Teacher
-                                                        </h4>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to delete
-                                                        {{ $item->periods }}?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cancel</button>
-                                                        <form method="POST"
-                                                            action="{{ route('period.destroy', ['period' => $item->id]) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-danger">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                        </td>
+                                    @endif
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $relationtableclass['class'] }}</td>
+                                        <td>No Section</td>
+                                        <td>
+                                            <div class="btn badge bg-danger">
+                                                No action
                                             </div>
-                                        </div>
+                                        </td>
+                                    </tr>
+                                    {{-- @dd($ClassSectionRelation) --}}
+                                    @endif
                                     @endforeach
                                 </tbody>
+                                <div class="modal" id="deleteModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Delete Teacher
+                                                </h4>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete
+                                                ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <form method="POST" action="/relationclasssection/destroy">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <input type="hidden" id="classId" name="classId" value="">
+                                                    <input type="hidden" id="sectionId" name="sectionId"
+                                                        value="">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                             </table>
                         </div>
                     </div>
@@ -152,3 +133,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteModal = document.getElementById('deleteModal');
+        const deleteButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+        const classIdInput = deleteModal.querySelector('#classId');
+        const sectionIdInput = deleteModal.querySelector('#sectionId');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const classId = this.getAttribute('data-classid');
+                const sectionId = this.getAttribute('data-sectionid');
+
+                classIdInput.value = classId;
+                sectionIdInput.value = sectionId;
+            });
+        });
+    });
+</script>

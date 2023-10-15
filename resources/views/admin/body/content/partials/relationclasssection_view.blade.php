@@ -1,18 +1,29 @@
 <div class="page-content">
     <div class="row">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <section>
                         <h4 class="mb-4">Fill Form</h4>
-                        <form class="forms-sample" method="POST" action="{{ route('relationclasssection.create.form') }}">
+                        <form class="forms-sample" method="POST"
+                            action="{{ route('relationclasssection.create.form') }}">
                             @csrf
                             <div class="mb-3">
                                 <label for="class" class="form-label">Class Name</label>
-                                <select class="form-control" name="class_id" id="period-name"
-                                    placeholder="Period Name" required>
+                                <select class="form-control" name="class_id" id="period-name" placeholder="Period Name"
+                                    required>
                                     @foreach ($class as $classlist)
-                                    <option value="{{$classlist->id}}">  {{ $classlist->class}}</option>
+                                        <option value="{{ $classlist->id }}"> {{ $classlist->class }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -21,7 +32,7 @@
                                 <select class="form-control" name="section_id" id="period-name"
                                     placeholder="Period Name" required>
                                     @foreach ($section as $sectionlist)
-                                    <option value="{{$sectionlist->id}}">  {{ $sectionlist->sections}}</option>
+                                        <option value="{{ $sectionlist->id }}"> {{ $sectionlist->sections }}</option>
                                     @endforeach
                                 </select>
                             </div>
