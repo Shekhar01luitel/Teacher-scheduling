@@ -259,4 +259,8 @@ class AdminController extends Controller
         // dd($relationtablelist);
         return view('admin.body.content.relationclasssection', compact('ClassSectionRelation','relationtablelist', 'section', 'class'));
     }
+
+    public function Subject(){
+        return view('admin.body.content.subject');
+    }
 }

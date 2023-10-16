@@ -64,6 +64,9 @@
                         <li class="nav-item">
                             <a href="{{ route('periods') }}" class="nav-link">Period</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('subject') }}" class="nav-link">Subject</a>
+                        </li>
                     </ul>
                 </div>
             </li>

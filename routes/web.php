@@ -84,6 +84,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/relationclasssection', [RelationClassSectionController ::class, 'create'])->name('relationclasssection.create.form');
     Route::post('/relationclasssection/destroy', [RelationClassSectionController::class, 'destroy'])->name('relationclasssection.destroy');
     Route::put('/relationclasssection/update/{update}', [RelationClassSectionController ::class, 'update'])->name('relationclasssection.update');
+
+    Route::get('/Subject', [AdminController::class, 'Subject'])->name('subject');
+
 });
 
 
