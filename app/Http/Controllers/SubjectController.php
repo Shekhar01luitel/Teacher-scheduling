@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoresubjectRequest;
 use App\Http\Requests\UpdatesubjectRequest;
 use App\Models\subject;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+
+
+
 
 class SubjectController extends Controller
 {
@@ -19,9 +25,16 @@ class SubjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // dd($_POST);
+        $validator = Validator::make($request->all(), [
+            'subject' => 'required|string'
+        ]);
+
+        subject::create($validator->validated());
+        // dd($validator);
+        return Redirect::route('subject');
     }
 
     /**
@@ -51,9 +64,17 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatesubjectRequest $request, subject $subject)
+    public function update(Request $request, $subject)
     {
         //
+        $validate = Validator::make($request->all(), [
+            'subject' => 'string',
+        ]);
+        // dd($_POST);
+
+        $section = subject::find($subject);
+        $section->update($validate->validated());
+        return redirect()->back()->with('succcess', 'Record updated successfully');
     }
 
     /**
@@ -61,6 +82,7 @@ class SubjectController extends Controller
      */
     public function destroy(subject $subject)
     {
-        //
+        $subject->delete();
+        return redirect()->back()->with('succcess', 'Form deleted successfully');
     }
 }

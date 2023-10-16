@@ -11,6 +11,8 @@ use App\Http\Controllers\CustomSectionController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CustomPeriodController;
 use App\Http\Controllers\RelationClassSectionController;
+use App\Http\Controllers\SubjectController;
+
 
 
 Route::get('/debug', function () {
@@ -86,6 +88,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/relationclasssection/update/{update}', [RelationClassSectionController ::class, 'update'])->name('relationclasssection.update');
 
     Route::get('/Subject', [AdminController::class, 'Subject'])->name('subject');
+    Route::post('/create/subject', [SubjectController::class, 'create'])->name('subject.create.form');
+    Route::delete('/subject/{subject}', [SubjectController::class, 'destroy'])->name('subject.destroy');
+    Route::put('/subject/update/{subject}', [SubjectController ::class, 'update'])->name('subject.update');
+
+    // relation_class_period_subject
+
+    Route::get('/relation/subject', [AdminController::class, 'RelationSubject'])->name('relation_class_period_subject');
 
 });
 

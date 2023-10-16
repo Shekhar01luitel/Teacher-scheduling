@@ -73,7 +73,7 @@
 
             <li class="nav-item nav-category">Relation Classess</li>
             <li
-                class="nav-item @if (request()->routeIs('class.section')) active @elseif (request()->routeIs('period.time.relation')) active @endif">
+                class="nav-item">
                 <a class="nav-link " data-bs-toggle="collapse" href="#relation" role="button" aria-expanded="false"
                     aria-controls="relation">
                     <i class="link-icon" data-feather="feather"></i>
@@ -84,6 +84,9 @@
                     <ul class="nav sub-menu">
                         <li class="nav-item">
                             <a href="{{ route('relationclasssection') }}" class="nav-link">Class-Section</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('relation_class_period_subject') }}" class="nav-link">Class-Period-Subject</a>
                         </li>
                     </ul>
                 </div>

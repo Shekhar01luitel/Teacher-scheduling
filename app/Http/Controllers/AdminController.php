@@ -14,6 +14,8 @@ use App\Http\Requests\Teacher;
 use App\Models\Section;
 use App\Models\CustomPeriod;
 use App\Models\RelationClassSection;
+use App\Models\subject;
+
 
 class AdminController extends Controller
 {
@@ -261,6 +263,11 @@ class AdminController extends Controller
     }
 
     public function Subject(){
-        return view('admin.body.content.subject');
+        $subject_list = subject::all();
+        return view('admin.body.content.subject', compact('subject_list'));
+    }
+
+    public function RelationSubject(){
+        return view('admin.body.content.relation_subject')
     }
 }
